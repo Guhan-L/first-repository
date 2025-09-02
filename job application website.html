@@ -1,0 +1,165 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Job & Internship Opportunities</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f4;
+    }
+    header {
+      background: #007acc;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    main {
+      padding: 20px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .job {
+      background: white;
+      padding: 15px;
+      margin: 10px 0;
+      border-left: 5px solid #007acc;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .job h3 {
+      margin: 0;
+    }
+    button {
+      background: #007acc;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+      margin-top: 10px;
+      border-radius: 3px;
+      font-size: 1em;
+    }
+    button:hover {
+      background: #005f99;
+    }
+    .application-form {
+      background: #fff;
+      padding: 20px;
+      margin-top: 30px;
+      display: none;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="file"] {
+      display: block;
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      font-size: 1em;
+    }
+    label {
+      font-weight: bold;
+      margin-bottom: 5px;
+      display: block;
+    }
+    footer {
+      background: #333;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Career Opportunities</h1>
+    <p>Find your next job or internship!</p>
+  </header>
+
+  <main>
+    <section class="job-listings">
+      <h2>Open Positions</h2>
+
+      <div class="job">
+        <h3>Frontend Developer (Intern)</h3>
+        <p>Location: Remote</p>
+        <p>Duration: 3 months</p>
+        <button onclick="openForm('Frontend Developer (Intern)')">Apply</button>
+      </div>
+
+      <div class="job">
+        <h3>Backend Developer (Full-Time)</h3>
+        <p>Location: New York, NY</p>
+        <p>Experience: 2+ years</p>
+        <button onclick="openForm('Backend Developer (Full-Time)')">Apply</button>
+      </div>
+    </section>
+
+    <section class="application-form" id="applicationForm">
+      <h2>Apply Now</h2>
+      <form id="applyForm" onsubmit="submitForm(event)">
+        <input type="hidden" id="jobRole" name="jobRole" />
+
+        <label for="name">Full Name</label>
+        <input type="text" id="name" required />
+
+        <label for="email">Email</label>
+        <input type="email" id="email" required />
+
+        <label for="resume">Resume (PDF)</label>
+        <input type="file" id="resume" accept=".pdf" required />
+
+        <button type="submit">Submit Application</button>
+        <button type="button" onclick="closeForm()">Cancel</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Career Board</p>
+  </footer>
+
+  <script>
+    function openForm(role) {
+      document.getElementById('applicationForm').style.display = 'block';
+      document.getElementById('jobRole').value = role;
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+
+    function closeForm() {
+      document.getElementById('applicationForm').style.display = 'none';
+      document.getElementById('applyForm').reset();
+    }
+
+    function submitForm(event) {
+      event.preventDefault();
+
+      const role = document.getElementById('jobRole').value;
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const resumeInput = document.getElementById('resume');
+      const resumeFile = resumeInput.files[0];
+
+      if (!resumeFile || resumeFile.type !== 'application/pdf') {
+        alert('Please upload a PDF resume.');
+        return;
+      }
+
+      alert(`Application submitted!\n\nRole: ${role}\nName: ${name}\nEmail: ${email}`);
+
+      // Reset form and hide
+      closeForm();
+    }
+  </script>
+</body>
+</html>
